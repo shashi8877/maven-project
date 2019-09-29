@@ -1,39 +1,48 @@
-pipeline
-{
-   agent any
+pipeline {
+	agent any
+	
+	
+	stages
+	{
+		stage ("scm checkout")
+		{
+git 'https://github.com/shashi8877/maven-project.git'		}
+		}
+   {
    
+stage ('Test stage'){
 
-
-
-   stages
-   {
-      stage ("scm checkout"){
-      git 'https://github.com/shashi8877/maven-project.git'
+steps {
+withMaven(maven: 'LOCAL MAVEN') 
+{
+   sh 'mvn test'
+}
+}
 }
 }
 
-   {
+ {
+   
+stage ('create package'){
 
-stage ('Testing Stage')
-   {
-
-
-steps
-      {
-    withMaven(maven: 'LOCAL MAVEN')
-    {
-      sh 'mvn test'
-    }
-}
-
-}
-   }
-}
-   }
+steps {
+withMaven(maven: 'LOCAL MAVEN') 
+{
+   sh 'mvn package'
 }
 }
+}
+}
+ {
+   
+stage ('Install package'){
 
-
-
-
-
+steps {
+withMaven(maven: 'LOCAL MAVEN') 
+{
+   sh 'mvn install'
+}
+}
+}
+}
+}
