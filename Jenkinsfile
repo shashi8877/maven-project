@@ -24,8 +24,17 @@ steps{
     }
 }
 
-
 }
+   stage ('Package Stage')
+   {
+   
+      steps{
+          withMaven(maven : 'LOCAL MAVEN')
+         {
+         sh 'mvn package'
+         }
+      }
+   }
 }
 }
 
