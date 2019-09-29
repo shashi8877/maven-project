@@ -18,7 +18,7 @@ stage ('Testing Stage')
 
 
 steps{
-    withMaven(maven : 'LOCAL MAVEN')
+    withMaven(maven: 'LOCAL MAVEN')
     {
       sh 'mvn test'
     }
@@ -29,7 +29,7 @@ steps{
    {
    
       steps{
-          withMaven(maven : 'LOCAL MAVEN')
+          withMaven(maven: 'LOCAL MAVEN')
          {
          sh 'mvn package'
          }
@@ -37,5 +37,8 @@ steps{
    }
 }
 }
+
+
+
 
 
