@@ -13,7 +13,7 @@ git 'https://github.com/shashi8877/maven-project.git'		}
 stage ('Test stage'){
 
 steps {
-withMaven(maven: 'LOCAL MAVEN') 
+withMaven(maven: 'Maven_3_6_3') 
 {
    sh 'mvn test'
 }
@@ -26,7 +26,7 @@ withMaven(maven: 'LOCAL MAVEN')
 stage ('create package'){
 
 steps {
-withMaven(maven: 'LOCAL MAVEN') 
+withMaven(maven: 'Maven_3_6_3') 
 {
    sh 'mvn package'
 }
@@ -38,7 +38,7 @@ withMaven(maven: 'LOCAL MAVEN')
 stage ('Install package'){
 
 steps {
-withMaven(maven: 'LOCAL MAVEN') 
+withMaven(maven: 'Maven_3_6_3') 
 {
    sh 'mvn install'
 }
@@ -47,8 +47,8 @@ withMaven(maven: 'LOCAL MAVEN')
 	 stage ('deploy to tomcat'){
 
 steps {
-	sshagent (['172.31.24.146']) {
-	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.24.146:/var/lib/tomcat/webapps'
+	sshagent (['35.194.61.169']) {
+	sh 'scp -o StrictHostKeyChecking=no */target/*.war ubuntu@35.194.61.169:/var/lib/tomcat/webapps'
 	}
 }	
 }
