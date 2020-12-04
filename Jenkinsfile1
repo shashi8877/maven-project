@@ -12,7 +12,7 @@ pipeline {
         }
     }
     
-     stages ("test") {
+     stage ("test") {
     
         steps {
             echo "testing the app"
@@ -20,7 +20,7 @@ pipeline {
         }
     }
     
-    stages ("deploy") {
+    stage ("deploy") {
     
         steps {
             echo "deploy the app"
