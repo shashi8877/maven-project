@@ -29,7 +29,7 @@ pipeline {
          	
         stage ('Deploy to Tomcat') {
             steps{
-	    sshagent (credentials: ['admin']) {
+	    sshagent (credentials: ['deploy_user']) {
             sh 'scp -o StrictHostKeyChecking=no ec2-user@18.191.193.185:/apache-tomcat-9.0.40/webapps'
 	
            	 }
