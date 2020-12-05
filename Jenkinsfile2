@@ -26,11 +26,19 @@ pipeline {
             }
         }
         }
+	
+       		 stage ('Install stage') {
+            		 steps{
+           			 withMaven(maven: 'mvn') {
+            			 sh 'mvn install -f maven-project'
+            }
+        }
+        }
          	
         stage ('Deploy to Tomcat') {
             steps{
-	    sshagent (credentials: ['deploy_user']) {
-            sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@3.139.96.212:/opt/tomcat/webapp"
+	    sshagent (['deploy_user']) {
+           	 sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@3.139.96.212:/opt/tomcat/webapp"
 	
            	 }
 	    }
