@@ -31,6 +31,7 @@ pipeline {
             steps{
 	    sshagent (credentials: ['admin']) {
             sh 'scp -o StrictHostKeyChecking=no ec2-user@18.191.193.185:/apache-tomcat-9.0.40/webapps'
+	
            	 }
 	    }
         }
