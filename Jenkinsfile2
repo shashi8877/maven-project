@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	stages	{
-		stage ("Build") {
+		stage ("Build stage") {
 		    steps{
 		     		sh "rm -rf maven-project"
             			sh 'git clone https://github.com/shashi8877/maven-project.git'	
@@ -19,20 +19,14 @@ pipeline {
         }
 	}
 
-       		 stage ('package') {
+       		 stage ('Package stage') {
             		 steps{
            			 withMaven(maven: 'mvn') {
             			 sh 'mvn package -f maven-project'
             }
         }
         }
-         	stage ('Install Package') {
-            		steps{
-            			withMaven(maven: 'mvn') {
-            			sh 'mvn Install -f maven-project'
-            }
-        }
-        }
+         	
         stage ('Deploy to Tomcat') {
             steps{
             sshagent (['18.191.193.185'])
