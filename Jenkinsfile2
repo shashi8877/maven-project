@@ -38,7 +38,7 @@ pipeline {
             sshagent (['18.191.193.185'])
             sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.191.193.185:/home/ec2-user/apache-tomcat-9.0.40/webapps'
             }
-        
+        }
     }
 }
 
