@@ -1,0 +1,44 @@
+pipeline {
+	agent any
+	
+	
+	stages	{
+		stage ("Build") {
+		    steps{
+            sh 'git clone https://github.com/shashi8877/maven-project.git'	
+            withMaven(maven: 'mvn')
+		    sh 'mvn clean -f maven-project'
+		    }
+		}
+        
+        stage ('Test stage') {
+            steps{
+            withMaven(maven: 'mvn')
+            sh 'mvn test -f maven-project'
+            }
+        }
+
+
+        stage ('package') {
+            steps{
+            withMaven(maven: 'mvn')
+            sh 'mvn package -f maven-project'
+            }
+        }
+        
+         stage ('Install Package') {
+            steps{
+            withMaven(maven: 'mvn')
+            sh 'mvn Install -f maven-project'
+            }
+        }
+        
+        stage ('Deploy to Tomcat') {
+            steps{
+            sshagent (['18.191.193.185'])
+            sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.191.193.185:/home/ec2-user/apache-tomcat-9.0.40/webapps'
+            }
+        }
+    }
+}
+
