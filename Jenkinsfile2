@@ -1,7 +1,6 @@
 pipeline {
 	agent any
 	
-	
 	stages	{
 		stage ("Build") {
 		    steps{
@@ -10,14 +9,14 @@ pipeline {
 		    sh 'mvn clean -f maven-project'
 		    }
 		}
-        
+             }
         stage ('Test stage') {
             steps{
             withMaven(maven: 'mvn') {
             sh 'mvn test -f maven-project'
             }
         }
-
+	}
 
         stage ('package') {
             steps{
@@ -25,14 +24,14 @@ pipeline {
             sh 'mvn package -f maven-project'
             }
         }
-        
+        }
          stage ('Install Package') {
             steps{
             withMaven(maven: 'mvn') {
             sh 'mvn Install -f maven-project'
             }
         }
-        
+        }
         stage ('Deploy to Tomcat') {
             steps{
             sshagent (['18.191.193.185'])
@@ -41,4 +40,4 @@ pipeline {
         }
     }
 }
-
+}
