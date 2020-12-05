@@ -27,6 +27,13 @@ pipeline {
         }
         }
 	
+	 stage ('Install stage') {
+            		 steps{
+           			 withMaven(maven: 'mvn') {
+            			 sh 'mvn install -f maven-project'
+            }
+        }
+        }
          	
         stage ('Deploy to Tomcat') {
             steps{
