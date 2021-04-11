@@ -38,7 +38,7 @@ pipeline {
         stage ('Deploy to Tomcat') {
             steps{
 	     sshagent (credentials: ['deploy_user']) {
-           	 sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Pipeline-3/maven-project/webapp/target/webapp.war ec2-user@172.31.40.152:/opt/tomcat/webapps"
+           	 sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Pipeline-3/maven-project/webapp/target/webapp.war ec2-user@18.224.20.233:/opt/tomcat/webapps"
 	
            	 }
 	    }
